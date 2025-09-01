@@ -7,7 +7,7 @@ on :
      branches:[ main ]
    jobs:
     build:
-     runs-on: ubuntu-latest
+     runs-on: self-hosted
      steps:
       - name: checkout repository
         uses: actions/checkout@v4
@@ -18,7 +18,7 @@ on :
       - name: Install dependencies
         run: npm ci
     docker:
-       runs-on: ubuntu-latest
+       runs-on: self-hosted
        needs: build
     steps:
       - name: Checkout repository
@@ -39,7 +39,7 @@ on :
             ${{ secrets.DOCKER_USERNAME }}/nodeapp:latest
 
      deploy:
-        runs-on: ubuntu-latest
+        runs-on: self-hosted
         needs: docker 
      steps:
       - name: Deploy via SSH
